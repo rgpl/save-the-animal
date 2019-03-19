@@ -1,0 +1,10 @@
+node_modules/
+dist/
+platforms/
+plugins/
+temp/
+.vscode/
+*.log
+package-lock.json
+/index.html
+build-config.js
