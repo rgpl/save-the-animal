@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 // Phaser webpack config
 const phaserModule = path.join(__dirname, '/node_modules/phaser-ce/');
@@ -33,7 +34,7 @@ module.exports = {
     mode:'development',
     entry: {
         app: [
-          'babel-polyfill',
+          '@babel/polyfill',
           path.resolve(__dirname,'src/index.js')
         ],
         vendor: ['pixi', 'p2', 'phaser']
@@ -84,7 +85,8 @@ module.exports = {
             baseDir: ['./dist', './build']
           }
         }),
-        new ExtractTextPlugin("style.css")
+        new ExtractTextPlugin("style.css"),
+        new CleanWebpackPlugin()
     ].concat(extraPlugins),
     module: {
         rules: [

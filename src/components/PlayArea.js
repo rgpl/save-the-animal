@@ -12,6 +12,7 @@ export default class PlayArea extends Phaser.Group {
         this.events = new EventEmitter();
         this.animals = config.animal_names;
         this.gameEnd = false;
+        this.pushInProgress = false;
         this.minSpeed = config.minVelocity;
         this.speed = this.minSpeed;
         this.fallenAnimals = [];
@@ -30,6 +31,8 @@ export default class PlayArea extends Phaser.Group {
         this.events.emit('next-animal',this.nextAnimal);
         if(!create){
             this.endGame();
+        }else{
+            this.pushInProgress = false;
         }
     }
 
@@ -40,8 +43,8 @@ export default class PlayArea extends Phaser.Group {
     }
 
     createAnimal(name){
+
         let animal = new Animal(this.game, config.fallingAnimal.x, config.fallingAnimal.y, 'animal','animal_'+name+'.png');
-        animal.outOfBoundsKill = true;
         this.add(animal);
 
         for(let i=0;i<this.fallenAnimals.length;i++){
@@ -57,7 +60,6 @@ export default class PlayArea extends Phaser.Group {
             return;
         }
         this.fallenAnimals.push(animal);
-        this.game.physics.arcade.enable(animal);
         animal.body.collideWorldBounds = true;
         animal.body.gravity.y = this.speed;
         animal.body.bounce.setTo(0,0);
@@ -66,26 +68,25 @@ export default class PlayArea extends Phaser.Group {
         animal.body.onWorldBounds = new Phaser.Signal();
         animal.body.onWorldBounds.add(this.onWorldHit, this);
         return true;
-
     }
 
     hitSprite(animal1,animal2){
 
-        if (!animal1.collided || !animal2.collided) {
+        if ((!animal1.collided || !animal2.collided) && !this.pushInProgress) {
+            this.pushInProgress = true;
             if(!animal1.collided){
                 animal1.collided = true;
             }
             if(!animal2.collided){
                 animal2.collided = true;
             }
-            animal1.inputEnabled = false;
-            animal2.inputEnabled = false;
+
             animal1.body.onCollide.dispose();
             animal2.body.onCollide.dispose();
             animal1.body.onWorldBounds.dispose();
             animal2.body.onWorldBounds.dispose();
-            animal1.body.gravity.y = 0;
-            animal2.body.gravity.y = 0;
+            animal1.inputEnabled = false;
+            animal2.inputEnabled = false;
             if (animal1.name === animal2.name) {
                 animal1.destroy();
                 animal2.destroy();
@@ -98,11 +99,11 @@ export default class PlayArea extends Phaser.Group {
 
     onWorldHit(animal, up, down, left, right) {
         if (down && !animal.collided){
+            animal.body.onWorldBounds.dispose();
+            animal.body.onCollide.dispose();
             animal.collided = true;
             animal.inputEnabled = false;
             animal.body.gravity.y=0;
-            animal.body.onWorldBounds.dispose();
-            animal.body.onCollide.dispose();
             this.pushAnimalsDown();
         }
     }
@@ -120,10 +121,10 @@ export default class PlayArea extends Phaser.Group {
     updateAnimalSpeed(speed){
 
         this.speed = this.minSpeed * speed;
-       /*  let currentAnimal = this.fallenAnimals[this.fallenAnimals.length - 1];
+        let currentAnimal = this.fallenAnimals[this.fallenAnimals.length - 1];
         if(!currentAnimal.collided){
             currentAnimal.body.velocity.y = this.speed;
-        } */
+        }
 
     }
 

@@ -8,6 +8,7 @@ export default class Animal extends Phaser.Sprite {
         this.scale.setTo(2);
         this.name = animal.split('_')[1];
         this.collided = false;
+        this.outOfBoundsKill = true;
         this.inputEnabled = true;
         this.createKey();
     }
