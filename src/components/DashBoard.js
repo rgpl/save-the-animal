@@ -17,13 +17,10 @@ export default class DashBoard extends Phaser.Group{
 
     createBoard(){
         let dashboardBg = this.game.make.image(config.dashBoardX,0,"dashboard_bg");
-        this.add(dashboardBg);
 
         let gameName = this.game.make.text(config.dbNameX, config.dbNameY, config.gameName, style.game_name);
-        this.add(gameName);
 
         let scoreLabel = this.game.make.text(config.dbNameX, config.scoreLabelY, config.scoreLabel,style.score_label);
-        this.add(scoreLabel);
 
         let scoreHolder = new Phaser.Rectangle(config.scoreHolder.x, config.scoreHolder.y, config.scoreHolder.w, config.scoreHolder.h);
 
@@ -31,28 +28,22 @@ export default class DashBoard extends Phaser.Group{
         scoreGraphics.beginFill(config.scoreHolderColor);
 
         scoreGraphics.drawRect(0, 0, scoreHolder.width, scoreHolder.height);
-        this.add(scoreGraphics);
 
         this.score = this.game.make.text(0,config.scoreValY,'00',style.score_value);
         this.score.setTextBounds(scoreHolder.x, scoreHolder.y, scoreHolder.width, scoreHolder.height);
         this.score.boundsAlignH = 'center';
         this.score.boundsAlignV = 'center';
-        this.add(this.score);
 
         let nextImageLabel = this.game.make.text(config.nextImgX, config.nextImgY, config.nextAnimalText, style.score_label);
-        this.add(nextImageLabel);
 
         let speedLabel = this.game.make.text( config.dbNameX, config.speedLabelY,config.speedLabelText, style.speed_label);
 
         speedLabel.name = "speed_label";
-        this.add(speedLabel);
 
         let speedValue = this.game.make.text(config.speedVal.x, config.speedVal.y, ''+this.speed, style.speed_value);
         speedValue.name = "speed_value";
-        this.add(speedValue);
 
         let incrementor = this.game.make.image(config.buttonPlusX,config.buttonPlusY,'button_plus');
-        this.add(incrementor);
         incrementor.inputEnabled = true;
         incrementor.scale.setTo(0.8);
         incrementor.events.onInputDown.add(()=>{
@@ -60,12 +51,13 @@ export default class DashBoard extends Phaser.Group{
         },this)
 
         let decrementor = this.game.make.image(config.buttonPlusX, config.buttonMinusY, 'button_minus');
-        this.add(decrementor);
         decrementor.inputEnabled = true;
         decrementor.scale.setTo(config.buttonScale);
         decrementor.events.onInputDown.add(() => {
             this.configureSpeed(false);
-        }, this)
+        }, this);
+
+        this.addMultiple([dashboardBg, gameName, scoreLabel, scoreGraphics, this.score, nextImageLabel, speedLabel, speedValue, incrementor, decrementor]);
     }
 
     updateScore(){
