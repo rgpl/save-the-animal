@@ -2,7 +2,9 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 // Phaser webpack config
 const phaserModule = path.join(__dirname, '/node_modules/phaser-ce/');
@@ -28,7 +30,7 @@ if (removeLogs) {
 }
 
 module.exports = {
-    mode: 'production',
+    mode: 'development',
     entry: {
         app: [
             'babel-polyfill',
@@ -74,7 +76,8 @@ module.exports = {
                 removeEmptyAttributes: false
             },
             hash: false
-        })
+        }),
+        new ExtractTextPlugin("style.css")
     ].concat(extraPlugins),
     module: {
         rules: [
@@ -96,10 +99,6 @@ module.exports = {
                 loader: ['expose-loader?p2']
             },
             {
-                test: /cryptojs\.js/,
-                use: ['expose-loader?cryptojs']
-            },
-            {
                 test: /\.(png|svg|jpg|gif)$/,
                 use: [
                     'file-loader'
@@ -116,6 +115,14 @@ module.exports = {
                 use: [
                     'file-loader'
                 ]
+            },
+            {
+                test: /\.css$/,
+                use: ExtractTextPlugin.extract(
+                    {
+                        fallback: 'style-loader',
+                        use: ['css-loader']
+                    })
             }
         ]
     },

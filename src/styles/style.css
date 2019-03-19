@@ -1,0 +1,46 @@
+html,
+body {
+    width: 100%;
+    height:100%;
+    margin: 0;
+    padding: 0;
+    background-color:#000000;
+}
+#content{
+    width: 100%;
+    height:100%;
+    float: left;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+#land_scape {
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height:100%;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    display: none;
+    pointer-events: none;
+}
+#connector {
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    background-color: #000000;
+    color: #FFFFFF;
+    font-family: sans-serif;
+    font-size: 2em;
+}
+
+/* css for spinner */
+
+.gspin_deep,.gspin_in_mid{-webkit-box-sizing:border-box}.gspin_deep,.gspin_deep_mid{bottom:0;right:0;border-width:7px;border-style:solid}.gspin{position:relative;width:75px;height:75px}.gspin_color_hold,.gspin_deep,.gspin_holder,.gspin_in_one{position:absolute;height:100%}.gspin_holder{width:100%;top:0;left:0;-webkit-animation:container-rotate 1568ms linear infinite;animation:container-rotate 1568ms linear infinite}.gspin_color_hold{width:100%;opacity:0}.gspin_color_one{border-color:#4285f4;-webkit-animation:fill-unfill-rotate 5332ms cubic-bezier(.4,0,.2,1) infinite both,blue-fade-in-out 5332ms cubic-bezier(.4,0,.2,1) infinite both;animation:fill-unfill-rotate 5332ms cubic-bezier(.4,0,.2,1) infinite both,blue-fade-in-out 5332ms cubic-bezier(.4,0,.2,1) infinite both}.gspin_color_two{border-color:#db4437;-webkit-animation:fill-unfill-rotate 5332ms cubic-bezier(.4,0,.2,1) infinite both,red-fade-in-out 5332ms cubic-bezier(.4,0,.2,1) infinite both;animation:fill-unfill-rotate 5332ms cubic-bezier(.4,0,.2,1) infinite both,red-fade-in-out 5332ms cubic-bezier(.4,0,.2,1) infinite both}.gspin_color_three{border-color:#f4b400;-webkit-animation:fill-unfill-rotate 5332ms cubic-bezier(.4,0,.2,1) infinite both,yellow-fade-in-out 5332ms cubic-bezier(.4,0,.2,1) infinite both;animation:fill-unfill-rotate 5332ms cubic-bezier(.4,0,.2,1) infinite both,yellow-fade-in-out 5332ms cubic-bezier(.4,0,.2,1) infinite both}.gspin_color_four{border-color:#0f9d58;-webkit-animation:fill-unfill-rotate 5332ms cubic-bezier(.4,0,.2,1) infinite both,green-fade-in-out 5332ms cubic-bezier(.4,0,.2,1) infinite both;animation:fill-unfill-rotate 5332ms cubic-bezier(.4,0,.2,1) infinite both,green-fade-in-out 5332ms cubic-bezier(.4,0,.2,1) infinite both}.gspin_in_one{display:inline-block;width:50%;overflow:hidden;border-color:inherit}.gspin_deep{-webkit-animation:left-spin 1333ms cubic-bezier(.4,0,.2,1) infinite both;animation:left-spin 1333ms cubic-bezier(.4,0,.2,1) infinite both;border-right-color:transparent!important;-webkit-transform:rotate(129deg);transform:rotate(129deg);width:200%;top:0;left:0;box-sizing:border-box;border-color:inherit;border-bottom-color:transparent!important;-webkit-border-radius:50%;border-radius:50%}.gspin_deep_mid,.gspin_in_mid{position:absolute;top:0;height:100%;border-color:inherit}.gspin_in_mid{box-sizing:border-box;left:45%;width:10%;overflow:hidden}.gspin_deep_mid{width:1000%;left:-450%;-webkit-box-sizing:border-box;box-sizing:border-box;border-bottom-color:transparent!important;-webkit-border-radius:50%;border-radius:50%;-webkit-animation:none;animation:none}@keyframes container-rotate{100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes fill-unfill-rotate{12.5%{-webkit-transform:rotate(135deg);transform:rotate(135deg)}25%{-webkit-transform:rotate(270deg);transform:rotate(270deg)}37.5%{-webkit-transform:rotate(405deg);transform:rotate(405deg)}50%{-webkit-transform:rotate(540deg);transform:rotate(540deg)}62.5%{-webkit-transform:rotate(675deg);transform:rotate(675deg)}75%{-webkit-transform:rotate(810deg);transform:rotate(810deg)}87.5%{-webkit-transform:rotate(945deg);transform:rotate(945deg)}100%{-webkit-transform:rotate(1080deg);transform:rotate(1080deg)}}@keyframes blue-fade-in-out{0%,100%,25%,90%{opacity:1}26%,89%{opacity:0}}@keyframes red-fade-in-out{0%,15%,51%{opacity:0}25%,50%{opacity:1}}@keyframes yellow-fade-in-out{0%,40%,76%{opacity:0}50%,75%{opacity:1}}@keyframes green-fade-in-out{0%,100%,65%{opacity:0}75%,90%{opacity:1}}@keyframes left-spin{0%,100%{-webkit-transform:rotate(130deg);transform:rotate(130deg)}50%{-webkit-transform:rotate(-5deg);transform:rotate(-5deg)}}

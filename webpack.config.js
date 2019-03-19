@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 // Phaser webpack config
 const phaserModule = path.join(__dirname, '/node_modules/phaser-ce/');
@@ -82,7 +83,8 @@ module.exports = {
           server: {
             baseDir: ['./dist', './build']
           }
-        })
+        }),
+        new ExtractTextPlugin("style.css")
     ].concat(extraPlugins),
     module: {
         rules: [
@@ -120,6 +122,14 @@ module.exports = {
                 use: [
                    'file-loader'
                 ]
+            },
+            {
+                test: /\.css$/,
+                use: ExtractTextPlugin.extract(
+                    {
+                        fallback: 'style-loader',
+                        use: ['css-loader']
+                    })
             }
         ]
     },
