@@ -16,7 +16,7 @@ const fullScreen = ()=> {
             docElm.msRequestFullscreen();
         }
     }
-    /*else {
+    else {
         if (document.exitFullscreen) {
             document.exitFullscreen();
         } else if (document.webkitExitFullscreen) {
@@ -26,7 +26,7 @@ const fullScreen = ()=> {
         } else if (document.msExitFullscreen) {
             document.msExitFullscreen();
         }
-    }*/
+    }
 }
 
 export default fullScreen;

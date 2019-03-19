@@ -18,7 +18,6 @@ export default class extends Phaser.State {
     }
 
     create(){
-
         this.forceSingleUpdate = true;
         this.time.advancedTiming = true;
         this.stage.disableVisibilityChange = true;
@@ -31,8 +30,6 @@ export default class extends Phaser.State {
         this.game.world.bringToTop(this.playField);
         this.game.physics.arcade.enable(this.playField);
 
-
-
         this.dashBoard = new DashBoard(this.game,'score-board');
         this.playField.events.on('update-score', () => {
             this.dashBoard.updateScore();
@@ -42,24 +39,11 @@ export default class extends Phaser.State {
             this.dashBoard.updateNextAnimal(name);
         });
 
-        this.playField.events.on('end', () => {
-            this.playField.endGame();
-            this.dashBoard.endGame();
-            this.state.start('Lobby');
-        });
-
-        this.dashBoard.events.on('to-lobby',()=>{
-            this.playField.endGame();
-            this.dashBoard.endGame();
-            this.state.start('Lobby');
-        });
-
         this.dashBoard.events.on('speed-update',(speed)=>{
             this.playField.updateAnimalSpeed(speed);
         })
+
         this.playField.pushAnimalsDown();
-
-
     }
 
     update(){

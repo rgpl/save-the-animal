@@ -9,7 +9,6 @@ import config from './config/configurations';
 
 class App extends Phaser.Game {
     constructor(){
-
         super(config.gameWidth,config.gameHeight,Phaser.CANVAS,'content',null,true);
 
         this.state.add('Preload', Preload, false);

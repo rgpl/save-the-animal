@@ -18,6 +18,7 @@ export default class PlayArea extends Phaser.Group {
         this.createGraphics();
         this.nextAnimal = this.nextAnimalToPush();
     }
+
     createGraphics(){
         let gameBg = this.game.make.image(0,0,'game_bg');
         this.add(gameBg);
@@ -39,7 +40,6 @@ export default class PlayArea extends Phaser.Group {
     }
 
     createAnimal(name){
-
         let animal = new Animal(this.game, config.fallingAnimal.x, config.fallingAnimal.y, 'animal','animal_'+name+'.png');
         animal.outOfBoundsKill = true;
         this.add(animal);
@@ -63,7 +63,6 @@ export default class PlayArea extends Phaser.Group {
         animal.body.bounce.setTo(0,0);
         animal.body.onCollide = new Phaser.Signal();
         animal.body.onCollide.add(this.hitSprite, this);
-
         animal.body.onWorldBounds = new Phaser.Signal();
         animal.body.onWorldBounds.add(this.onWorldHit, this);
         return true;
@@ -71,7 +70,7 @@ export default class PlayArea extends Phaser.Group {
     }
 
     hitSprite(animal1,animal2){
-        console.log('hit');
+
         if (!animal1.collided || !animal2.collided) {
             if(!animal1.collided){
                 animal1.collided = true;
@@ -98,7 +97,6 @@ export default class PlayArea extends Phaser.Group {
     }
 
     onWorldHit(animal, up, down, left, right) {
-
         if (down && !animal.collided){
             animal.collided = true;
             animal.inputEnabled = false;
@@ -107,7 +105,6 @@ export default class PlayArea extends Phaser.Group {
 
             this.pushAnimalsDown();
         }
-
     }
 
     updateScore(){
@@ -115,12 +112,9 @@ export default class PlayArea extends Phaser.Group {
     }
 
     checkOverlap(animal1, animal2) {
-
         let boundsA = animal1.getBounds();
         let boundsB = animal2.getBounds();
-
         return Phaser.Rectangle.intersects(boundsA, boundsB);
-
     }
 
     updateAnimalSpeed(speed){

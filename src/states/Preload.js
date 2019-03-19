@@ -41,7 +41,7 @@ export default class extends Phaser.State {
     }
 
     loadStart(){
-
+        //Todo
     }
 
     fileComplete(progress, cacheKey, success, totalLoaded, totalFiles){
@@ -53,21 +53,4 @@ export default class extends Phaser.State {
         this.state.start('Lobby');
     }
 
-    handleCorrect(){
-        if(!this.game.device.desktop){
-            document.getElementById("land_scape").style.display="none";
-        }
-    }
-
-    handleIncorrect(){
-        if(!this.game.device.desktop){
-            document.getElementById("land_scape").style.display="block";
-        }
-    }
-
-    gofull(){
-        if(!this.game.device.desktop){
-            fullScreen();
-        }
-    }
 }
