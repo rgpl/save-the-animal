@@ -102,7 +102,7 @@ export default class PlayArea extends Phaser.Group {
             animal.inputEnabled = false;
             animal.body.gravity.y=0;
             animal.body.onWorldBounds.dispose();
-
+            animal.body.onCollide.dispose();
             this.pushAnimalsDown();
         }
     }
@@ -120,10 +120,10 @@ export default class PlayArea extends Phaser.Group {
     updateAnimalSpeed(speed){
 
         this.speed = this.minSpeed * speed;
-        let currentAnimal = this.fallenAnimals[this.fallenAnimals.length - 1];
+       /*  let currentAnimal = this.fallenAnimals[this.fallenAnimals.length - 1];
         if(!currentAnimal.collided){
             currentAnimal.body.velocity.y = this.speed;
-        }
+        } */
 
     }
 
