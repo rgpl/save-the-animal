@@ -1,6 +1,4 @@
 import Phaser from 'phaser';
-
-import fullScreen from '../services/fullscreen';
 import assets from '../config/asset';
 import style from '../styles/styles';
 import config from '../config/configurations';
@@ -25,6 +23,7 @@ export default class extends Phaser.State {
         this.load.onFileComplete.add(this.fileComplete, this);
         this.load.onLoadComplete.add(this.loadComplete, this);
 
+        this.load.image("orientation_bg", assets["orientation_bg"]);
         this.load.image("bg", assets["bg"]);
         this.load.image("game_bg", assets["game_bg"]);
         this.load.image("menu", assets["menu"]);
@@ -52,5 +51,6 @@ export default class extends Phaser.State {
         document.getElementById('connector').style.display = "none";
         this.state.start('Lobby');
     }
+
 
 }

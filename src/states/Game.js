@@ -15,12 +15,12 @@ export default class extends Phaser.State {
     preload(){
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         this.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+        this.scale.forceOrientation(true, false);
+        this.scale.enterIncorrectOrientation.add(this.handleIncorrect, this);
+        this.scale.leaveIncorrectOrientation.add(this.handleCorrect, this);
     }
 
     create(){
-        this.forceSingleUpdate = true;
-        this.time.advancedTiming = true;
-        this.stage.disableVisibilityChange = true;
         this.input.maxPointers = 1;
 
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -43,6 +43,10 @@ export default class extends Phaser.State {
             this.playField.updateAnimalSpeed(speed);
         })
 
+        this.orientationBlocker = this.add.image(0, 0, 'orientation_bg');
+        this.orientationBlocker.scale.setTo(1.4, 0.47);
+        this.orientationBlocker.visible = false;
+
         this.playField.pushAnimalsDown();
     }
 
@@ -50,8 +54,16 @@ export default class extends Phaser.State {
         this.game.physics.arcade.collide(this.playField);
     }
 
-    render(){
+    handleCorrect() {
+        if (!this.game.device.desktop) {
+            this.orientationBlocker.visible = false;
+        }
+    }
 
+    handleIncorrect() {
+        if (!this.game.device.desktop) {
+            this.orientationBlocker.visible = true;
+        }
     }
 
 }

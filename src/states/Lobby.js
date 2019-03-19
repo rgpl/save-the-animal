@@ -11,9 +11,14 @@ export default class extends Phaser.State {
     }
     preload(){
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        this.scale.forceOrientation(true, false);
+        this.scale.enterIncorrectOrientation.add(this.handleIncorrect, this);
+        this.scale.leaveIncorrectOrientation.add(this.handleCorrect, this);
+        this.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
     }
     create(){
-        let bg = this.game.add.image(0,0,'bg');
+
+        let bg = this.add.image(0,0,'bg');
         bg.scale.setTo(config.lobbyBgScale);
 
         let gameName = this.add.text(this.world.centerX, config.lobbyNameY, 'Save the Animal', style.game_logo);
@@ -26,8 +31,24 @@ export default class extends Phaser.State {
         playButton.events.onInputDown.add(()=>{
             this.state.start('Game');
         }, this);
-    }
-    render(){
+
+        this.orientationBlocker = this.add.image(0, 0, 'orientation_bg');
+        this.orientationBlocker.scale.setTo(1.4,0.47);
+        this.orientationBlocker.visible = false;
+
 
     }
+
+    handleCorrect() {
+        if (!this.game.device.desktop) {
+            this.orientationBlocker.visible = false;
+        }
+    }
+
+    handleIncorrect() {
+        if (!this.game.device.desktop) {
+            this.orientationBlocker.visible = true;
+        }
+    }
+
 }
